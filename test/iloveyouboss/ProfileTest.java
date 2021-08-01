@@ -1,22 +1,32 @@
 package iloveyouboss;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class ProfileTest {
+    private Profile profile;
+    private BooleanQuestion question;
+    private Criteria criteria;
 
-    @Test
-    // 함수명은 테스트의 내용을 알 수 있도록 한다
-    public void matchAnswersFalseWhenMustMatchCriteriaNotMet(){
-        Profile profile = new Profile("Bull Hocky, Inc.");
-        Question question = new BooleanQuestion(1, "Get bonuses?");
+    @Before
+    public void create(){
+        profile = new Profile("Bull Hocky, Inc.");
+        question = new BooleanQuestion(1, "Get bonuses?");
+        criteria = new Criteria();
         // 질문에 대한 적절한 답
         Answer profileAnswer = new Answer(question, Bool.FALSE);
         profile.add(profileAnswer);
 
+    }
+
+
+    @Test
+    // 함수명은 테스트의 내용을 알 수 있도록 한다
+    public void matchAnswersFalseWhenMustMatchCriteriaNotMet(){
+
         // 지원자의 답
-        Criteria criteria = new Criteria();
         Answer criteriaAnswer = new Answer(question, Bool.TRUE);
         Criterion criterion = new Criterion(criteriaAnswer, Weight.MustMatch);
         criteria.add(criterion);
@@ -34,14 +44,8 @@ public class ProfileTest {
     @Test
     // 함수명은 테스트의 내용을 알 수 있도록 한다
     public void matchAnswersTrueWhenDontCareCriteriaNotMet(){
-        Profile profile = new Profile("Bull Hocky, Inc.");
-        Question question = new BooleanQuestion(1, "Get bonuses?");
-        // 질문에 대한 적절한 답
-        Answer profileAnswer = new Answer(question, Bool.FALSE);
-        profile.add(profileAnswer);
 
         // 지원자의 답
-        Criteria criteria = new Criteria();
         Answer criteriaAnswer = new Answer(question, Bool.TRUE);
         Criterion criterion = new Criterion(criteriaAnswer, Weight.DontCare);
         criteria.add(criterion);
