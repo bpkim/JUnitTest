@@ -30,6 +30,7 @@ public class ScoreCollectionTest {
         int actualResult = collection.arithmeticMean();
         
         // 단언
+        // actualResult 값이 6과 같다면 테스트 성공 아니면 테스트 실패
         assertThat(actualResult, equalTo(6));
     }
 }
